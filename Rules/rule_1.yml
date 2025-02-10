@@ -1,0 +1,13 @@
+rule ZeroValueFunctionPlaceholder {
+  meta:
+  events:
+    // Even though $ph is used in the match section, there is no
+    // implicit filtering of zero values for $ph, because $ph is assigned to a function.
+    $ph = re.capture($e.principal.hostname, "some-regex")
+
+  match:
+    $ph over 5m
+
+  condition:
+    $e
+}
